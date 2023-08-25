@@ -1,0 +1,7 @@
+binance_connector==3.1.1
+openai==0.27.7
+pytest==7.4.0
+PyYAML==6.0.1
+redis==4.5.5
+black
+flake8

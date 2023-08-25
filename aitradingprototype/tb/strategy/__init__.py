@@ -1,0 +1,2 @@
+from aitradingprototype.tb.strategy.strategy import Strategy
+from aitradingprototype.tb.strategy.successive_strategy import SuccessiveStrategy

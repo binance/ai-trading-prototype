@@ -1,0 +1,45 @@
+# Trading Bot Configuration File
+
+# Input Option
+# Default: 'redis', options: 'redis', 'file'.
+# If 'redis', processes sentiments events from the Redis server (set up config fields under '# Redis').
+# If 'file', processes sentiments from a file (check 'sentiments_file' below).
+input_option: 'redis' 
+
+# Input File, fill if "input_option: 'file'".
+# The required line format is `"headline collected source","headline collected timestamp (ms)","headline published timestamp (ms)","headline","sentiment"`.
+# The file can't have comment lines. If there's empty lines, they'll be ignored.
+# Sentiment is "bullish", "bearish" or "unknown", if an unusual value is given, the line will be ignored.
+sentiments_file: 'output/sentiments_btc.csv'  
+
+# Binance
+# Spot Live Trading (Production) base URL: 'https://api.binance.com'
+# Spot Testnet base URL (recommended for testing): 'https://testnet.binance.vision'
+base_url: 'https://testnet.binance.vision'
+# If using HMAC API keys, fill api_key and secret_key
+# If using ED25519 or RSA  API keys, fill api_key, private_key_path and (optionally) private_key_password.
+# If all the fields are filled, ED25519 or RSA (private_key_path) takes precedence.
+api_key: ''
+secret_key: '' 
+private_key_path: ''     # eg. './private_key.pem'. 
+private_key_password: '' # Optional, for when private_key is encrypted with a password.
+
+# Redis
+redis_host: 'localhost'
+redis_port: 6379
+redis_channel: 'headlines_sentiment'
+
+# Trading Settings
+trading_strategy:
+  symbol: 'BTCUSDT'
+  #'base_asset' is symbol's base asset, the underlying asset for the orders.
+  base_asset: 'BTC'
+  order_quantity: 0.001
+  #'total_quantity_limit' defines the upper limit on the total quantity of 'base_asset' that can be held via the accumulation of BUY orders at any given point.
+  # When this limit is reached, the bot will not place any more BUY orders.
+  # This serves as an efficient way of risk management, ensuring no more of the currency is purchased than the user wants to hold at one time.
+  total_quantity_limit: 0.01 # Maximum quantity, of base-currency, that can be held at any one time. 
+
+# Logging
+# Default: 'INFO', options: text value levels from https://docs.python.org/3/library/logging.html#logging-levels
+logging_level: 'INFO'

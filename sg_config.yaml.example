@@ -1,0 +1,30 @@
+# Sentiment Generator Configuration File
+
+# Asset to get market sentiment
+asset: 'BTC'
+
+# Input file
+# The required line format is `"headline collected source","headline collected timestamp (ms)","headline published timestamp (ms)","headline"`.
+# Each field is wrapped with `"` and can't contain `,"`.
+# This file can't have comment lines. If there's empty lines, they'll be ignored.
+# If SG is already running and there's addition of new lines, those will still be processed.
+headlines_file: 'headlines/headlines_sample.csv'
+
+# Output Option
+# Default: 'redis', options: 'redis', 'file'.
+# If it's 'file', there's creation of `./output/sentiments_<asset>.csv`
+# File's line format: `"headline collected source","headline collected timestamp (ms)","headline published timestamp (ms)","headline","sentiment"`
+output_option: 'redis'
+
+# OpenAI
+openai_api_key: ''
+reqs_min: 3 # maximum requests per minute, default is 3 for free OpenAI accounts.
+
+# Redis
+redis_host: 'localhost'
+redis_port: 6379
+redis_channel: 'headlines_sentiment'
+
+# Logging
+# Default: 'INFO', options: text value levels from https://docs.python.org/3/library/logging.html#logging-levels
+logging_level: 'INFO'
